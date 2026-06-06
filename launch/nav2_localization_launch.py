@@ -20,7 +20,7 @@ from ament_index_python.packages import get_package_share_directory
 TESTBED_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CONFIG_DIR = os.path.join(TESTBED_ROOT, "config")
 DEFAULT_MAP = os.path.join(TESTBED_ROOT, "maps", "warehouse.yaml")
-DEFAULT_PARAMS = os.path.join(CONFIG_DIR, "nav2.yaml")
+DEFAULT_PARAMS = os.path.join(CONFIG_DIR, "nav2_navfn.yaml")
 
 
 def generate_launch_description():
