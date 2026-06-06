@@ -3,7 +3,7 @@
 Launch Nav2 + SLAM Toolbox for Isaac Sim (no pre-built map needed).
 
 Usage:
-    ros2 launch ~/isaac_nav_diploma/launch/nav2_slam_launch.py \
+    ros2 launch ~/isaacsim-nav2/launch/nav2_slam_launch.py \
         params_file:=/path/to/nav2.yaml \
         slam_params_file:=/path/to/slam.yaml
 """
@@ -19,7 +19,7 @@ from ament_index_python.packages import get_package_share_directory
 
 TESTBED_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CONFIG_DIR = os.path.join(TESTBED_ROOT, "config")
-DEFAULT_NAV2_PARAMS = os.path.join(CONFIG_DIR, "nav2.yaml")
+DEFAULT_NAV2_PARAMS = os.path.join(CONFIG_DIR, "nav2_navfn.yaml")
 DEFAULT_SLAM_PARAMS = os.path.join(CONFIG_DIR, "slam.yaml")
 
 
