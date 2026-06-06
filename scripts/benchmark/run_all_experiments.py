@@ -153,27 +153,35 @@ class CommandBuilder:
         if cfg.mode == "localization":
             if not cfg.map_yaml:
                 raise ValueError(f"{cfg.experiment_id}: localization mode requires map_yaml")
+    
             launch_file = self.project_root / "launch" / "nav2_localization_launch.py"
+            map_path = (self.project_root / cfg.map_yaml).resolve()
+            params_path = (self.project_root / cfg.nav2_params_file).resolve()
+    
             return [
                 "bash", "-lc",
                 (
                     f"source {self.ros_setup} && ros2 launch {launch_file} "
-                    f"map:={cfg.map_yaml} params_file:={cfg.nav2_params_file}"
+                    f"map:={map_path} params_file:={params_path}"
                 )
             ]
-
+    
         if cfg.mode == "slam":
             launch_file = self.project_root / "launch" / "nav2_slam_launch.py"
             if not cfg.slam_params_file:
                 raise ValueError(f"{cfg.experiment_id}: slam mode requires slam_params_file")
+    
+            params_path = (self.project_root / cfg.nav2_params_file).resolve()
+            slam_params_path = (self.project_root / cfg.slam_params_file).resolve()
+    
             return [
                 "bash", "-lc",
                 (
                     f"source {self.ros_setup} && ros2 launch {launch_file} "
-                    f"params_file:={cfg.nav2_params_file} slam_params_file:={cfg.slam_params_file}"
+                    f"params_file:={params_path} slam_params_file:={slam_params_path}"
                 )
             ]
-
+    
         raise ValueError(f"Unsupported mode: {cfg.mode}")
 
     def noise_command(self, cfg: RunConfig) -> Optional[List[str]]:
