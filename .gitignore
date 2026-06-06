@@ -26,8 +26,7 @@ log/
 .DS_Store
 Thumbs.db
 
-# Generated SLAM maps / plots
-*.pgm
+# Generated plots / figures
 plots/
 figures/
 
