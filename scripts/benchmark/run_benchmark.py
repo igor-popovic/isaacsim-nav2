@@ -1,18 +1,12 @@
 """
 Run navigation benchmark using Nav2 via the Isaac Sim ROS 2 bridge.
 
-Isaac Sim side: loads the scene, spawns the robot, creates OmniGraph action
-graphs (differential drive, odometry, TF, LiDAR) and runs the physics loop.
-
-Nav2 side (launched separately by the user):
-    ros2 launch nav2_bringup navigation_launch.py use_sim_time:=True
-
 Usage:
-    ~/isaacsim/python.sh ~/etf_isaac_nav_testbed/scripts/benchmark/run_benchmark.py \
+    ~/isaacsim/python.sh ~/isaacsim-nav2/scripts/benchmark/run_benchmark.py \
         --scene warehouse --robot turtlebot
-    ~/isaacsim/python.sh ~/etf_isaac_nav_testbed/scripts/benchmark/run_benchmark.py \
-        --scene warehouse --robot carter --headless --timeout 120
 """
+
+# Use Isaac Sim's bundled rclpy instead of system ROS Python packages.
 
 import os
 import sys
@@ -83,11 +77,16 @@ enable_extension("isaacsim.ros2.bridge")
 omni.kit.app.get_app().update()
 
 # Use Isaac Sim's bundled rclpy (Python 3.11 compatible) instead of
-# the system /opt/ros/humble rclpy (Python 3.10).
+# the system ROS Python packages.
 _ISAAC_SIM_ROOT = os.environ.get("ISAAC_PATH", os.path.expanduser("~/isaacsim"))
 _ISAACSIM_RCLPY = os.path.join(
-    _ISAAC_SIM_ROOT, "exts", "isaacsim.ros2.bridge", "humble", "rclpy",
+    _ISAAC_SIM_ROOT, "exts", "isaacsim.ros2.bridge", "jazzy", "rclpy",
 )
+if not os.path.isdir(_ISAACSIM_RCLPY):
+    raise RuntimeError(
+        f"Bundled Isaac Sim rclpy path not found: {_ISAACSIM_RCLPY}"
+    )
+
 
 # Remove system ROS Python paths and prepend Isaac Sim's bundled one
 sys.path = [p for p in sys.path if "/ros/humble/" not in p and "/ros/jazzy/" not in p]
@@ -898,3 +897,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
