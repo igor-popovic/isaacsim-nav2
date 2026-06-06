@@ -8,11 +8,11 @@ Runs inside Isaac Sim's Python (uses bundled rclpy) or as a standalone
 ROS 2 node.
 
 Usage (inside Isaac Sim Python — for use alongside run_benchmark.py):
-    ~/isaacsim/python.sh ~/etf_isaac_nav_testbed/scripts/tools/add_sensor_noise.py \
+    ~/isaacsim/python.sh ~/isaacsim-nav2/scripts/tools/add_sensor_noise.py \
         --lidar-noise-std 0.02 --lidar-dropout 0.05
 
 Usage (standalone ROS 2 node):
-    python3 ~/etf_isaac_nav_testbed/scripts/tools/add_sensor_noise.py \
+    python3 ~/isaacsim-nav2/scripts/tools/add_sensor_noise.py \
         --lidar-noise-std 0.02 --imu-accel-noise 0.05
 
 Topic mapping:
